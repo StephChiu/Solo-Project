@@ -4,16 +4,21 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const apiRouter = require('./routes/api');
+
 const PORT = 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// app.use('/api', apiRouter);
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'))
 })
 
+
+app.use((req, res) => {res.send(404)});
 
 app.use((err, req, res, next) => {
   const defaultErr = {
@@ -28,6 +33,6 @@ app.use((err, req, res, next) => {
 
 
 
-app.use((req, res) => {res.send(404)});
-
 app.listen(PORT, () => console.log(`listening on PORT ${PORT}...`));
+
+module.exports = app;
