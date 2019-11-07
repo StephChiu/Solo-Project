@@ -7,7 +7,7 @@ const AnimalCard = (props) => {
     <div>{`Name: ${props.name}`}</div>
     <div>{`Breed: ${props.breed}`}</div>
     <div>{`Contact: ${props.contact}`}</div>
-    <input type="button" value="Add" onClick={() => props.addList(props.id)}/>
+    <input type="button" value="Save" onClick={() => props.addItem(props.id, props.name, props.breed, props.pic, props.contact)}/>
   </div>
   )
 }

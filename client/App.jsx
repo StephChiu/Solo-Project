@@ -22,6 +22,7 @@ class App extends Component {
      this.genderChange = this.genderChange.bind(this);
      this.ageChange = this.ageChange.bind(this);
      this.handleSubmit = this.handleSubmit.bind(this);
+     this.addItem = this.addItem.bind(this);
   }
 
   typeChange(event) {
@@ -41,7 +42,7 @@ class App extends Component {
   }
   
   handleSubmit(event) {
-    console.log(this.state);
+    // console.log(this.state);
     event.preventDefault();
     fetch('/api', {
       method: 'POST',
@@ -55,7 +56,7 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data.animals)
+      // console.log(data.animals)
       let array = data.animals;
       let newArray = []
       for (let i = 0; i < array.length; i +=1 ) {
@@ -75,12 +76,31 @@ class App extends Component {
     });
   }
 
+  addItem(id, name, breed, pic, contact) {
+    const body = {
+      id: id,
+      name: name,
+      breed: breed,
+      pic: pic,
+      contact: contact
+    }
+    fetch('/db/saveItem', {
+      method: 'post', 
+      body: JSON.stringify(body),
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('data returned to front-end --->', data)
+    })
+  }
+
   render() { 
     return ( 
       <div className="container"> 
         <Form type={this.state.type} typeChange={this.typeChange} size={this.state.size} sizeChange={this.sizeChange} gender={this.state.gender} genderChange={this.genderChange} age={this.state.age} ageChange={this.ageChange} handleSubmit={this.handleSubmit}/>
-        <AnimalDisplay animalList={this.state.animalList}/>
-        <List animalList={this.state.animalList}/>
+        <AnimalDisplay animalList={this.state.animalList} addItem={this.addItem}/>
+        <List/>
       </div>
      );
   }

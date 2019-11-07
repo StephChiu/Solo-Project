@@ -1,3 +1,4 @@
+const dotenv = require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -5,6 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const apiRouter = require('./routes/api');
+const dbRouter = require('./routes/db');
 
 const PORT = 3000;
 
@@ -12,6 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', apiRouter);
+app.use('/db', dbRouter);
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'))
@@ -21,7 +24,6 @@ app.get('/', (req, res) => {
 app.use((req, res) => {res.status(404)});
 
 app.use((err, req, res, next) => {
-  console.log(err)
   const defaultErr = {
     log: 'Unknown error caught in middleware',
     status: 400,

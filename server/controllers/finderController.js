@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
+const db = require('../models/animalModels');
 
 const finderController = {};
 
@@ -22,7 +23,7 @@ finderController.getToken = (req, res, next) => {
     return response.json()
   })
   .then(data => {
-    console.log('data is --->', data);
+    // console.log('data is --->', data);
     res.locals.token = data.access_token;
     return next();
   })
@@ -32,7 +33,7 @@ finderController.getToken = (req, res, next) => {
 }
 
 finderController.getAnimals = (req, res, next) => {
-  console.log('getAnimals, res.locals --->', res.locals.token);
+  // console.log('getAnimals, res.locals --->', res.locals.token);
   fetch(`https://api.petfinder.com/v2/animals?type=${res.locals.type}&size=${res.locals.size}&gender=${res.locals.gender}&age=${res.locals.age}`, {
     method: 'get',
     headers: {"Authorization": `Bearer ${res.locals.token}`}
@@ -41,7 +42,7 @@ finderController.getAnimals = (req, res, next) => {
     return response.json();
   })
   .then(data => {
-    console.log('response data --->', data);
+    // console.log('response data --->', data);
     res.locals.results = data;
     return next();
   })
@@ -50,4 +51,6 @@ finderController.getAnimals = (req, res, next) => {
   })
 }
 
+
 module.exports = finderController;
+

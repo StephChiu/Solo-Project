@@ -8,4 +8,5 @@ router.post('/', finderController.getToken, finderController.getAnimals, (req, r
   res.status(200).json(res.locals.results);
 });
 
+
 module.exports = router;
