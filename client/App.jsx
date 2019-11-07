@@ -25,6 +25,7 @@ class App extends Component {
   }
 
   typeChange(event) {
+    console.log('inside TypeChange');
     this.setState({ type: event.target.value })
   }
 
@@ -40,8 +41,11 @@ class App extends Component {
     this.setState({ age: event.target.value })
   }
 
-  handleSubmit() {
-    
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log('button press');
+    fetch('/api')
+    .then(response => console.log(response));
   }
 
   render() { 

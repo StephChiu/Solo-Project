@@ -2,7 +2,7 @@ import React from 'react';
 
 const Form = (props) => {
   return (
-    <form className="form" onSubmit={props.handleSubmit}>
+    <form className="form" onSubmit={(event) => props.handleSubmit(event)}>
       <h3>Filter</h3>
       <label>
       Type:

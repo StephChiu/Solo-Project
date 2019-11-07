@@ -11,16 +11,17 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use('/api', apiRouter);
+app.use('/api', apiRouter);
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'))
 })
 
 
-app.use((req, res) => {res.send(404)});
+app.use((req, res) => {res.status(404)});
 
 app.use((err, req, res, next) => {
+  console.log(err)
   const defaultErr = {
     log: 'Unknown error caught in middleware',
     status: 400,
@@ -28,9 +29,8 @@ app.use((err, req, res, next) => {
   }
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
-  res.send(errorObj.status).json(errorObj.message);
+  res.status(errorObj.status).json(errorObj.message);
 })
-
 
 
 app.listen(PORT, () => console.log(`listening on PORT ${PORT}...`));
