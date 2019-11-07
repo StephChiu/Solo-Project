@@ -11,47 +11,74 @@ class App extends Component {
 
     this.state = { 
       animalList: [],
-      type: '',
-      size: '',
-      gender: '',
-      age: '',
-      fetched: false,
+      type: 'dog',
+      size: 'small',
+      gender: 'male',
+      age: 'baby'
      };
 
      this.typeChange = this.typeChange.bind(this);
      this.sizeChange = this.sizeChange.bind(this);
      this.genderChange = this.genderChange.bind(this);
      this.ageChange = this.ageChange.bind(this);
+     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   typeChange(event) {
-    console.log('inside TypeChange');
     this.setState({ type: event.target.value })
   }
-
+  
   sizeChange(event) {
     this.setState({ size: event.target.value })
   }
-
+  
   genderChange(event) {
     this.setState({ gender: event.target.value })
   }
-
+  
   ageChange(event) {
     this.setState({ age: event.target.value })
   }
-
+  
   handleSubmit(event) {
+    console.log(this.state);
     event.preventDefault();
-    console.log('button press');
-    fetch('/api')
-    .then(response => console.log(response));
+    fetch('/api', {
+      method: 'POST',
+      body: JSON.stringify({
+        "type": this.state.type,
+        "size": this.state.size,
+        "gender": this.state.gender,
+        "age": this.state.age
+      }),
+      headers: {"Content-type": "application/json"}
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.animals)
+      let array = data.animals;
+      let newArray = []
+      for (let i = 0; i < array.length; i +=1 ) {
+        let obj = {};
+        obj.id = array[i].id
+        obj.name = array[i].name;
+        obj.breed = array[i].breeds.primary;
+        if (array[i].photos.length > 0) {
+          obj.pic = array[i].photos[0].medium;
+        } else {
+          obj.pic = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNACAnUruTnvmmxnaKBZ852q4P8r61Dc3BBlB3H3PGuNUWi7sk&s'
+        } 
+        obj.contact = array[i].contact.email;
+        newArray.push(obj);
+      }
+      this.setState({ animalList: newArray});
+    });
   }
 
   render() { 
     return ( 
       <div className="container"> 
-        <Form type={this.state.type} typeChange={this.typeChange} size={this.state.size} sizeChange={this.sizeChange} gender={this.state.gender} genderChange={this.genderChange} age={this.state.age} ageChange={this.ageChange} handeSubmit={this.handleSubmit}/>
+        <Form type={this.state.type} typeChange={this.typeChange} size={this.state.size} sizeChange={this.sizeChange} gender={this.state.gender} genderChange={this.genderChange} age={this.state.age} ageChange={this.ageChange} handleSubmit={this.handleSubmit}/>
         <AnimalDisplay animalList={this.state.animalList}/>
         <List animalList={this.state.animalList}/>
       </div>

@@ -1,13 +1,15 @@
 import React from 'react';
 
 const AnimalCard = (props) => {
+  return (
   <div className="animalCard">
-    <h4>{`Name: ${props.animalList.name}`}</h4>
-    <h4>{`Breed: ${props.animalList.breed}`}</h4>
-    <h4>{`Gender: ${props.animalList.gender}`}</h4>
-    <h4>{`Age: ${props.animalList.age}`}</h4>
-    <input type="button" value="Add" onClick={() => props.addList(props.animalList.id)}/>
+    <img className="picture" src={props.pic}/>
+    <div>{`Name: ${props.name}`}</div>
+    <div>{`Breed: ${props.breed}`}</div>
+    <div>{`Contact: ${props.contact}`}</div>
+    <input type="button" value="Add" onClick={() => props.addList(props.id)}/>
   </div>
+  )
 }
 
 export default AnimalCard;
