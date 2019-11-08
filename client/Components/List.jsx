@@ -40,8 +40,8 @@ class List extends Component {
       listArray.push(<ListItem key={i} animal={this.state.savedList[i]} removeItem={this.removeItem}/>)
     }
     return ( 
-      <div className="list">
-        <h3 id="listHeader">Potential Family Members</h3>
+      <div className="container-list">
+        <h3 id="listHeader">Potential FurBabies</h3>
         {listArray}
       </div>
      );

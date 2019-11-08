@@ -1,28 +1,49 @@
-.container {
+body {
+  font-family: 'Playfair Display';
+  background-color: rgb(245, 244, 244);
+}
+
+html {
+  background-color: rgb(245, 244, 244);
+}
+
+
+.container-main {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   margin: 20px;
 }
 
-.form {
+.container-form {
   display: flex;
   flex-direction: column;
-  /* border: 1px solid rgb(165, 165, 165); */
+  height: 100%;
 }
 
-.animalDisplay {
-  width: 75%;
+.container-animalDisplay {
   display: flex;
+  flex-grow: 1;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 65%;
+  border-left: 1px solid #6d6d6d;
+  border-right: 1px solid #6d6d6d;
 }
 
-.animalCard {
-  height: 350px;
+.container-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 50px;
+}
+
+
+.container-animalCard {
+  height: 450px;
   width: 250px;
   word-wrap: break-word;
-  border: 1px black solid;
+  margin: 3px;
 }
 
 #adoptionHeader {
@@ -31,30 +52,29 @@
 }
 
 .picture {
-  width: 250px;
-  height: 250px;
+  width: 248px;
+  height: 248px;
 }
 
 #listHeader {
   text-align: center;
+  border-bottom: 3px double rgb(66, 66, 66);
 }
 
-.list {
+.card listPicture {
+  width: 190px;
+  height: 190px;
+}
+
+.container-listItem {
   width: 200px;
-  /* justify-content: center; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.listPicture {
-  width: 150px;
-  height: 150px;
-}
-
-.listItem {
-  width: 150px;
-  height: 300px;
+  height: auto;
   word-wrap: break-word;
 }
 
+.row {
+  margin:0 -15px;
+}
+.col-xx-xx {
+  padding:0 15px;
+}

@@ -7,7 +7,7 @@ const AnimalDisplay = (props) => {
     AnimalDisplayArray.push(<AnimalCard id={props.animalList[i].id} key={i} name={props.animalList[i].name} breed={props.animalList[i].breed} pic={props.animalList[i].pic} contact={props.animalList[i].contact} addItem={props.addItem}/>)
   }
   return (
-    <div className="animalDisplay">
+    <div className="container-animalDisplay">
       <h3 id="adoptionHeader">Available for Adoption</h3>
       {AnimalDisplayArray}
     </div>

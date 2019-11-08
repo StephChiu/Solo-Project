@@ -2,10 +2,12 @@ import React from 'react';
 
 const Form = (props) => {
   return (
-    <form className="form" onSubmit={(event) => props.handleSubmit(event)}>
+    <form className="container-form" onSubmit={(event) => props.handleSubmit(event)}>
+      {/* <div class="form-group"> */}
       <h3>Filter</h3>
       <label>
-      Type:
+      Type: 
+      <br/>
         <select value={props.type} onChange={props.typeChange}>
           <option value="dog">Dog</option>
           <option value="cat">Cat</option>
@@ -14,7 +16,8 @@ const Form = (props) => {
         </select>
       </label>
       <label>
-      Size:
+      Size: 
+      <br/>
         <select value={props.size} onChange={props.sizeChange}>
           <option value="small">Small</option>
           <option value="medium">Medium</option>
@@ -24,6 +27,7 @@ const Form = (props) => {
       </label>
       <label>
       Gender:
+      <br/>
         <select value={props.gender} onChange={props.genderChange}>
           <option value="male">Male</option>
           <option value="female">Female</option>
@@ -31,6 +35,7 @@ const Form = (props) => {
       </label>
       <label>
       Age:
+      <br/>
         <select value={props.age} onChange={props.ageChange}>
           <option value="baby">Baby</option>
           <option value="young">Young</option>
@@ -38,7 +43,8 @@ const Form = (props) => {
           <option value="senior">Senior</option>
         </select>
       </label>
-      <input type="submit" value="Search"/>
+      <input class="btn btn-secondary" type="submit" value="Search"/>
+      {/* </div> */}
     </form>
   )
 };

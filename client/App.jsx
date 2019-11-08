@@ -56,7 +56,7 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      // console.log(data.animals)
+      console.log(data.animals)
       let array = data.animals;
       let newArray = []
       for (let i = 0; i < array.length; i +=1 ) {
@@ -97,7 +97,7 @@ class App extends Component {
 
   render() { 
     return ( 
-      <div className="container"> 
+      <div className="container-main"> 
         <Form type={this.state.type} typeChange={this.typeChange} size={this.state.size} sizeChange={this.sizeChange} gender={this.state.gender} genderChange={this.genderChange} age={this.state.age} ageChange={this.ageChange} handleSubmit={this.handleSubmit}/>
         <AnimalDisplay animalList={this.state.animalList} addItem={this.addItem}/>
         <List/>
